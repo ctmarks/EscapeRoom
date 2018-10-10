@@ -18,6 +18,9 @@ public:
 	// Sets default values for this component's properties
 	UOpenDoor();
 
+	void OpenDoor();
+	void CloseDoor();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -35,6 +38,11 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	AActor *ActorThatOpens;
+
+	UPROPERTY(EditAnywhere)
+	float DoorCloseDelay = 1.f;
+
+	float LastDoorOpenTime;
 	
-	void OpenDoor() const;
+	AActor *Owner;
 };

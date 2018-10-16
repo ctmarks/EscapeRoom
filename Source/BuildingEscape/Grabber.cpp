@@ -27,6 +27,17 @@ void UGrabber::BeginPlay()
 	FString ObjectName = GetOwner()->GetName();
 	FString ObjectPos = GetOwner()->GetActorLocation().ToString();
 	UE_LOG(LogTemp, Warning, TEXT("%s is at %s"), *ObjectName, *ObjectPos);
+
+	/// Look for attached physics handle
+	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
+	if (PhysicsHandle)
+	{
+		// Physics Handle is found
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s is missing physics component handle."), *GetOwner()->GetName());
+	}
 	
 }
 
@@ -77,7 +88,6 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	if (ActorHit)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Actor being hit by line trace: %s"), *(ActorHit->GetName()));
-	}
-	
+	}	
 }
 

@@ -21,6 +21,9 @@ public:
 	void OpenDoor();
 	void CloseDoor();
 
+	// Gets the total mass of all the actors on top of the pressure plate
+	float GetTotalMassOfActorsOnPlate();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -35,9 +38,6 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume *PressurePlate;
-
-	UPROPERTY(EditAnywhere)
-	AActor *ActorThatOpens;
 
 	UPROPERTY(EditAnywhere)
 	float DoorCloseDelay = 1.f;

@@ -41,6 +41,7 @@ void UGrabber::FindPhysicsHandleComponent()
 void UGrabber::FindInputComponent()
 {
 	InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
+	if (!InputComponent) { return; }
 	if (InputComponent)
 	{
 		// input Handle is found, bind the input action
@@ -63,6 +64,7 @@ void UGrabber::Grab()
 	/// If we hit something then attach a physics channel
 	if (ActorHit)
 	{
+		if (!PhysicsHandle) { return; }
 		PhysicsHandle->GrabComponentAtLocationWithRotation(
 			ComponentToGrab,
 			NAME_None,	// No bones needed
@@ -74,6 +76,7 @@ void UGrabber::Grab()
 
 void UGrabber::Release()
 {
+	if (!PhysicsHandle) { return; }
 	PhysicsHandle->ReleaseComponent();
 }
 
@@ -83,6 +86,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
 	GetReachLineEnd();
+	if (!PhysicsHandle) { return; }
 
 	// If the physics handle is attached
 	if (PhysicsHandle->GrabbedComponent)
